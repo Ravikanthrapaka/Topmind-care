@@ -1,4 +1,3 @@
-// src/WhyChooseSection.jsx
 import { motion } from "framer-motion";
 
 export default function WhyChooseSection() {
@@ -26,10 +25,10 @@ export default function WhyChooseSection() {
   ];
 
   return (
-    <section className="py-12  bg-gradient-to-b from-purple-50 to-white px-20">
-      <div className="max-w-5xl  mb-10">
+    <section className="py-12 bg-gradient-to-b from-purple-50 to-white px-6 sm:px-10 lg:px-20">
+      <div className="max-w-5xl mb-10">
         <motion.h2
-          className="text-3xl font-bold text-purple-800 mb-4"
+          className="text-2xl sm:text-3xl font-bold text-purple-800 mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -38,9 +37,10 @@ export default function WhyChooseSection() {
         </motion.h2>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Table for medium+ screens */}
+      <div className="hidden md:block overflow-x-auto">
         <motion.table
-          className="w-full border-collapse bg-white shadow-lg rounded-xl overflow-hidden"
+          className="w-full min-w-[600px] border-collapse bg-white shadow-lg rounded-xl overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -65,6 +65,23 @@ export default function WhyChooseSection() {
             ))}
           </tbody>
         </motion.table>
+      </div>
+
+      {/* Stacked cards for small screens */}
+      <div className="md:hidden flex flex-col gap-4">
+        {data.map((row, index) => (
+          <motion.div
+            key={index}
+            className="bg-white shadow-lg rounded-xl p-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2, duration: 0.6 }}
+          >
+            <h3 className="font-semibold text-gray-800 mb-2">{row.feature}</h3>
+            <p className="text-green-600 font-semibold">{row.mindery}</p>
+            <p className="text-red-500">{row.others}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
